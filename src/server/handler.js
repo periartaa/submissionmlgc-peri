@@ -40,6 +40,8 @@ async function postPredictHandler(request, h) {
     response.code(201);
     return response;
   } catch (error) {
+    console.log(error);
+
     const response = h.response({
       status: "fail",
       message: "Terjadi kesalahan dalam melakukan prediksi",
