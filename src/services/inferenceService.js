@@ -14,12 +14,12 @@ async function predictClassification(model, image) {
 
   const classes = [
     "Cancer",
-    "Non-Cancer",
+    "Non-cancer",
     "With Image Size More Than 1000000 byte",
     "With Bad Request",
   ];
 
-  const classResult = tf.argMax(prediction, 1).dataSync()[0];
+  const classResult = confidenceScore > 50 ? 0 : 1;
   const label = classes[classResult];
 
   let suggestion;
@@ -27,7 +27,7 @@ async function predictClassification(model, image) {
   if (label === "Cancer") {
     suggestion = "Segera periksa ke dokter!";
   }
-  if (label === "Non-Cancer") {
+  if (label === "Non-cancer") {
     suggestion = "Penyakit kanker tidak terdeteksi.";
   }
 
